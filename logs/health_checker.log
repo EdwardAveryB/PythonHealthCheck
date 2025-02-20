@@ -1,0 +1,4 @@
+2025-02-20 18:56:27,785 - INFO - [red]Fake Post Endpoint (https://fetch.com/some/post/endpoint) - Status: DOWN - Latency: 100.69ms[/]
+2025-02-20 18:56:27,792 - INFO - [green]Fetch Index Page (https://fetch.com/) - Status: UP - Latency: 109.24ms[/]
+2025-02-20 18:56:27,806 - INFO - [green]Fetch Careers Page (https://fetch.com/careers) - Status: UP - Latency: 121.34ms[/]
+2025-02-20 18:56:27,808 - INFO - [cyan]fetch.com has 67% availability[/cyan]
