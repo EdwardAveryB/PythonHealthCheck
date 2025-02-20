@@ -1,0 +1,19 @@
+- name: Fetch Index Page
+  url: https://fetch.com/
+  method: GET
+  headers:
+    user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36
+
+- name: Fetch Careers Page
+  url: https://fetch.com/careers
+  method: GET
+  headers:
+    user-agent: fetch-synthetic-monitor
+
+- name: Fake Post Endpoint
+  url: https://fetch.com/some/post/endpoint
+  method: POST
+  headers:
+    user-agent: fetch-synthetic-monitor
+    content-type: application/json
+  body: '{"foo": "bar"}'

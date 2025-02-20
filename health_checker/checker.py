@@ -31,22 +31,27 @@ class HealthChecker:
         body = endpoint.get("body", None)
         domain = url.split("/")[2]  # Extract domain from URL
 
+        latency = None  # Ensure latency always exists
+        status = "DOWN"  # Default to DOWN in case of failure
+
         start_time = time.time()
         try:
             async with session.request(method, url, headers=headers, json=body) as response:
                 latency = (time.time() - start_time) * 1000  # Convert to ms
-                status = "UP" if (200 <= response.status < 300 and latency < 500) else "DOWN"
+                if 200 <= response.status < 300 and latency < 500:
+                    status = "UP"
+
         except Exception as e:
             logging.warning(f"{name} ({url}) failed with error: {e}")
-            status = "DOWN"
 
         # Track stats
         self.domain_stats[domain]['total'] += 1
         if status == "UP":
             self.domain_stats[domain]['up'] += 1
-        
-        logging.info(f"{name} ({url}) - Status: {status} - Latency: {latency:.2f}ms")
-    
+
+        latency_display = f"{latency:.2f}ms" if latency is not None else "N/A"
+        logging.info(f"{name} ({url}) - Status: {status} - Latency: {latency_display}")
+
     async def run_health_checks(self):
         """Continuously check endpoints every interval."""
         async with aiohttp.ClientSession() as session:
