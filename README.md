@@ -1,117 +1,67 @@
-# PythonHealthCheck
+<h2>Overview</h2>
+<p>This program is a <strong>Site Reliability Engineering (SRE) health checker</strong> that monitors the availability of specified HTTP endpoints. It:</p>
+<ul>
+    <li>Reads a list of endpoints from a YAML configuration file.</li>
+    <li>Sends periodic health check requests.</li>
+    <li>Logs results to a file and console.</li>
+    <li>Tracks <strong>long-term availability trends</strong>.</li>
+    <li><strong>Visualizes uptime trends</strong> in a dynamically updated graph.</li>
+    <li><strong>Sends email alerts</strong> when availability drops below a threshold.</li>
+</ul>
 
-Fetch Health Checker
-====================
+<h2>Features</h2>
+<ul>
+    <li>✅ <strong>Asynchronous HTTP health checks</strong> (fast & non-blocking)</li>
+    <li>✅ <strong>Tracks uptime percentages</strong> over time</li>
+    <li>✅ <strong>Saves structured reports</strong> in CSV & JSON format</li>
+    <li>✅ <strong>Auto-generates visual graphs</strong> for availability trends</li>
+    <li>✅ <strong>Logs detailed results</strong> in the <code>logs/</code> directory</li>
+</ul>
 
-Overview
---------
+<h2>📂 Project Structure</h2>
+<pre>
+FetchHealthCheck/
+│── health_checker/           # Core logic
+│   │── init.py│   │── checker.py            # Main health checker script
+│── tests/                    # Unit tests
+│── config/                   # Configuration files
+│   │── sample_config.yaml    # Example YAML configuration
+│── logs/                     # Generated reports & logs
+│── visualize_trends.py       # Graph generation script
+│── requirements.txt          # Dependencies
+│── README.md                 # Documentation
+│── run.py                    # Entry point script
 
-This program is a **Site Reliability Engineering (SRE) health checker** that monitors the availability of specified HTTP endpoints. It:
+<h2>🛠️ Setup & Installation</h2>
+<h3>1️⃣ Install Dependencies</h3>
+<p>Ensure you have Python 3.8+ installed. Then run:</p>
+<pre><code>pip install -r requirements.txt</code></pre>
 
-*   Reads a list of endpoints from a YAML configuration file.
-    
-*   Sends periodic health check requests.
-    
-*   Logs results to a file and console.
-    
-*   Tracks **long-term availability trends**.
-    
-*   **Visualizes uptime trends** in a dynamically updated graph.
-    
-*   **Sends email alerts** when availability drops below a threshold.
-    
+<h3>2️⃣ Configure Endpoints</h3>
+<p>Create a <strong>YAML configuration file</strong> (or use <code>config/sample_config.yaml</code>):</p>
+<pre><code>- name: Fetch Index Page
+<h2>🚀 Running the Program</h2>
+<h3>1️⃣ Start the Health Checker</h3>
+<p>Run the script to begin monitoring:</p>
+<pre><code>python run.py config/sample_config.yaml --interval 15</code></pre>
+<p><strong>Expected behavior:</strong></p>
+<ul>
+    <li>Console logs <strong>real-time status updates</strong>.</li>
+    <li><strong>Logs are saved</strong> in <code>logs/health_checker.log</code>.</li>
+    <li><strong>Alerts trigger</strong> if availability drops below 80%.</li>
+    <li><strong>Data is stored</strong> in <code>logs/availability_report.csv</code> & <code>.json</code>.</li>
+    <li><strong>A graph is generated</strong> (<code>logs/availability_trends.png</code>).</li>
+</ul>
 
-Features
---------
+<h2>📊 Viewing Reports & Graphs</h2>
+<h3>1️⃣ Check the Logs</h3>
+<pre><code>cat logs/health_checker.log</code></pre>
+<h3>2️⃣ Open Availability Reports</h3>
+<pre><code>cat logs/availability_report.csv
 
-✅ **Asynchronous HTTP health checks** (fast & non-blocking)✅ **Tracks uptime percentages** over time✅ **Saves structured reports** in CSV & JSON format✅ **Auto-generates visual graphs** for availability trends✅ **Sends email alerts** for critical failures✅ **Logs detailed results** in the logs/ directory
-
-📂 Project Structure
---------------------
-
-Plain textANTLR4BashCC#CSSCoffeeScriptCMakeDartDjangoDockerEJSErlangGitGoGraphQLGroovyHTMLJavaJavaScriptJSONJSXKotlinLaTeXLessLuaMakefileMarkdownMATLABMarkupObjective-CPerlPHPPowerShell.propertiesProtocol BuffersPythonRRubySass (Sass)Sass (Scss)SchemeSQLShellSwiftSVGTSXTypeScriptWebAssemblyYAMLXML`   FetchHealthCheck/  │── health_checker/           # Core logic  │   │── __init__.py             │   │── checker.py            # Main health checker script  │── tests/                    # Unit tests  │── config/                   # Configuration files  │   │── sample_config.yaml    # Example YAML configuration  │── logs/                     # Generated reports & logs  │── visualize_trends.py       # Graph generation script  │── requirements.txt          # Dependencies  │── README.md                 # Documentation  │── run.py                    # Entry point script   `
-
-🛠️ Setup & Installation
-------------------------
-
-### **1️⃣ Install Dependencies**
-
-Ensure you have Python 3.8+ installed. Then run:
-
-Plain textANTLR4BashCC#CSSCoffeeScriptCMakeDartDjangoDockerEJSErlangGitGoGraphQLGroovyHTMLJavaJavaScriptJSONJSXKotlinLaTeXLessLuaMakefileMarkdownMATLABMarkupObjective-CPerlPHPPowerShell.propertiesProtocol BuffersPythonRRubySass (Sass)Sass (Scss)SchemeSQLShellSwiftSVGTSXTypeScriptWebAssemblyYAMLXML`   pip install -r requirements.txt   `
-
-### **2️⃣ Configure Endpoints**
-
-Create a **YAML configuration file** (or use config/sample\_config.yaml):
-
-Plain textANTLR4BashCC#CSSCoffeeScriptCMakeDartDjangoDockerEJSErlangGitGoGraphQLGroovyHTMLJavaJavaScriptJSONJSXKotlinLaTeXLessLuaMakefileMarkdownMATLABMarkupObjective-CPerlPHPPowerShell.propertiesProtocol BuffersPythonRRubySass (Sass)Sass (Scss)SchemeSQLShellSwiftSVGTSXTypeScriptWebAssemblyYAMLXML`   - name: Fetch Index Page    url: https://fetch.com/    method: GET    headers:      user-agent: Mozilla/5.0  - name: Fetch Careers Page    url: https://fetch.com/careers    method: GET    headers:      user-agent: fetch-synthetic-monitor   `
-
-🚀 Running the Program
-----------------------
-
-### **1️⃣ Start the Health Checker**
-
-Run the script to begin monitoring:
-
-Plain textANTLR4BashCC#CSSCoffeeScriptCMakeDartDjangoDockerEJSErlangGitGoGraphQLGroovyHTMLJavaJavaScriptJSONJSXKotlinLaTeXLessLuaMakefileMarkdownMATLABMarkupObjective-CPerlPHPPowerShell.propertiesProtocol BuffersPythonRRubySass (Sass)Sass (Scss)SchemeSQLShellSwiftSVGTSXTypeScriptWebAssemblyYAMLXML`   python run.py config/sample_config.yaml --interval 15   `
-
-Expected behavior:
-
-*   Console logs **real-time status updates**.
-    
-*   **Logs are saved** in logs/health\_checker.log.
-    
-*   **Alerts trigger** if availability drops below 80%.
-    
-*   **Data is stored** in logs/availability\_report.csv & .json.
-    
-*   **A graph is generated** (logs/availability\_trends.png).
-    
-
-📊 Viewing Reports & Graphs
----------------------------
-
-### **1️⃣ Check the Logs**
-
-Plain textANTLR4BashCC#CSSCoffeeScriptCMakeDartDjangoDockerEJSErlangGitGoGraphQLGroovyHTMLJavaJavaScriptJSONJSXKotlinLaTeXLessLuaMakefileMarkdownMATLABMarkupObjective-CPerlPHPPowerShell.propertiesProtocol BuffersPythonRRubySass (Sass)Sass (Scss)SchemeSQLShellSwiftSVGTSXTypeScriptWebAssemblyYAMLXML`   cat logs/health_checker.log   `
-
-### **2️⃣ Open Availability Reports**
-
-Plain textANTLR4BashCC#CSSCoffeeScriptCMakeDartDjangoDockerEJSErlangGitGoGraphQLGroovyHTMLJavaJavaScriptJSONJSXKotlinLaTeXLessLuaMakefileMarkdownMATLABMarkupObjective-CPerlPHPPowerShell.propertiesProtocol BuffersPythonRRubySass (Sass)Sass (Scss)SchemeSQLShellSwiftSVGTSXTypeScriptWebAssemblyYAMLXML`   cat logs/availability_report.csv  cat logs/availability_report.json   `
-
-### **3️⃣ View the Uptime Trends Graph**
-
-Run:
-
-Plain textANTLR4BashCC#CSSCoffeeScriptCMakeDartDjangoDockerEJSErlangGitGoGraphQLGroovyHTMLJavaJavaScriptJSONJSXKotlinLaTeXLessLuaMakefileMarkdownMATLABMarkupObjective-CPerlPHPPowerShell.propertiesProtocol BuffersPythonRRubySass (Sass)Sass (Scss)SchemeSQLShellSwiftSVGTSXTypeScriptWebAssemblyYAMLXML`   python visualize_trends.py   `
-
-Expected outcome:
-
-*   **Graph appears showing uptime trends**.
-    
-*   **Red markers** highlight low availability (< 80%).
-    
-*   **Graph is saved as logs/availability\_trends.png**.
-    
-
-🛠️ Customization
------------------
-
-### **Adjusting Alert Threshold**
-
-Modify checker.py:
-
-Plain textANTLR4BashCC#CSSCoffeeScriptCMakeDartDjangoDockerEJSErlangGitGoGraphQLGroovyHTMLJavaJavaScriptJSONJSXKotlinLaTeXLessLuaMakefileMarkdownMATLABMarkupObjective-CPerlPHPPowerShell.propertiesProtocol BuffersPythonRRubySass (Sass)Sass (Scss)SchemeSQLShellSwiftSVGTSXTypeScriptWebAssemblyYAMLXML`   ALERT_THRESHOLD = 85.0  # Change threshold from 80% to 85%   `
-
-### **Changing Health Check Interval**
-
-Plain textANTLR4BashCC#CSSCoffeeScriptCMakeDartDjangoDockerEJSErlangGitGoGraphQLGroovyHTMLJavaJavaScriptJSONJSXKotlinLaTeXLessLuaMakefileMarkdownMATLABMarkupObjective-CPerlPHPPowerShell.propertiesProtocol BuffersPythonRRubySass (Sass)Sass (Scss)SchemeSQLShellSwiftSVGTSXTypeScriptWebAssemblyYAMLXML`   python run.py config/sample_config.yaml --interval 30  # Check every 30 seconds   `
-
-🚀 Future Enhancements
-----------------------
-
-*   **Add Slack alerts** for failures
-    
-*   **Enhance web dashboard monitoring**
-    
-*   **Support API-based alert integrations**
+<h2>🚀 Future Enhancements</h2>
+<ul>
+    <li>🔜 **Add Slack alerts** for failures</li>
+    <li>🔜 **Enhance web dashboard monitoring**</li>
+    <li>🔜 **Support API-based alert integrations**</li>
+</ul>
