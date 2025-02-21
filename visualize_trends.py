@@ -6,8 +6,11 @@ import os
 TRENDS_FILE = "logs/availability_trends.csv"
 OUTPUT_IMAGE = "logs/availability_trends.png"
 
+# Define alert threshold (e.g., below 80% is considered critical)
+ALERT_THRESHOLD = 80.0  
+
 def plot_availability_trends():
-    """Read availability data and generate a graph."""
+    """Read availability data and generate a graph with alerts."""
     if not os.path.exists(TRENDS_FILE):
         print("No availability trends data found. Run the health checker first.")
         return
@@ -22,16 +25,29 @@ def plot_availability_trends():
     # Convert timestamp to datetime for proper plotting
     df["timestamp"] = pd.to_datetime(df["timestamp"])
 
-    # Plot availability for each domain
+    # Create the plot
     plt.figure(figsize=(10, 5))
+    
     for domain in df["domain"].unique():
         domain_df = df[df["domain"] == domain]
-        plt.plot(domain_df["timestamp"], domain_df["availability"], marker="o", linestyle="-", label=domain)
+
+        # Identify low availability points
+        low_availability = domain_df["availability"] < ALERT_THRESHOLD
+
+        # Plot normal availability in blue
+        plt.plot(domain_df["timestamp"], domain_df["availability"], marker="o", linestyle="-", label=domain, color="blue")
+
+        # Highlight critical availability drops in red
+        plt.scatter(domain_df["timestamp"][low_availability], domain_df["availability"][low_availability], color="red", label=f"{domain} (Low Availability)")
+
+        # Check if any domain is below the threshold
+        if any(low_availability):
+            print(f"⚠️ WARNING: {domain} dropped below {ALERT_THRESHOLD}% availability!")
 
     # Formatting the graph
     plt.xlabel("Timestamp")
     plt.ylabel("Availability (%)")
-    plt.title("Long-Term Availability Trends")
+    plt.title("Long-Term Availability Trends with Alerts")
     plt.xticks(rotation=45)
     plt.legend()
     plt.grid(True)

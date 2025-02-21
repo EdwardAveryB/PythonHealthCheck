@@ -1,0 +1,191 @@
+[
+    {
+        "timestamp": "2025-02-21 06:19:31",
+        "domain": "fetch.com",
+        "endpoint": "Fake Post Endpoint",
+        "status": "DOWN",
+        "latency": "95.38ms"
+    },
+    {
+        "timestamp": "2025-02-21 06:19:31",
+        "domain": "fetch.com",
+        "endpoint": "Fetch Index Page",
+        "status": "UP",
+        "latency": "116.93ms"
+    },
+    {
+        "timestamp": "2025-02-21 06:19:31",
+        "domain": "fetch.com",
+        "endpoint": "Fetch Careers Page",
+        "status": "UP",
+        "latency": "150.81ms"
+    },
+    {
+        "timestamp": "2025-02-21 06:19:31",
+        "domain": "fetch.com",
+        "endpoint": "Fake Post Endpoint",
+        "status": "DOWN",
+        "latency": "95.38ms"
+    },
+    {
+        "timestamp": "2025-02-21 06:19:31",
+        "domain": "fetch.com",
+        "endpoint": "Fetch Index Page",
+        "status": "UP",
+        "latency": "116.93ms"
+    },
+    {
+        "timestamp": "2025-02-21 06:19:31",
+        "domain": "fetch.com",
+        "endpoint": "Fetch Careers Page",
+        "status": "UP",
+        "latency": "150.81ms"
+    },
+    {
+        "timestamp": "2025-02-21 06:19:46",
+        "domain": "fetch.com",
+        "endpoint": "Fetch Careers Page",
+        "status": "UP",
+        "latency": "43.93ms"
+    },
+    {
+        "timestamp": "2025-02-21 06:19:46",
+        "domain": "fetch.com",
+        "endpoint": "Fake Post Endpoint",
+        "status": "DOWN",
+        "latency": "48.87ms"
+    },
+    {
+        "timestamp": "2025-02-21 06:19:46",
+        "domain": "fetch.com",
+        "endpoint": "Fetch Index Page",
+        "status": "UP",
+        "latency": "52.16ms"
+    },
+    {
+        "timestamp": "2025-02-21 06:19:31",
+        "domain": "fetch.com",
+        "endpoint": "Fake Post Endpoint",
+        "status": "DOWN",
+        "latency": "95.38ms"
+    },
+    {
+        "timestamp": "2025-02-21 06:19:31",
+        "domain": "fetch.com",
+        "endpoint": "Fetch Index Page",
+        "status": "UP",
+        "latency": "116.93ms"
+    },
+    {
+        "timestamp": "2025-02-21 06:19:31",
+        "domain": "fetch.com",
+        "endpoint": "Fetch Careers Page",
+        "status": "UP",
+        "latency": "150.81ms"
+    },
+    {
+        "timestamp": "2025-02-21 06:19:46",
+        "domain": "fetch.com",
+        "endpoint": "Fetch Careers Page",
+        "status": "UP",
+        "latency": "43.93ms"
+    },
+    {
+        "timestamp": "2025-02-21 06:19:46",
+        "domain": "fetch.com",
+        "endpoint": "Fake Post Endpoint",
+        "status": "DOWN",
+        "latency": "48.87ms"
+    },
+    {
+        "timestamp": "2025-02-21 06:19:46",
+        "domain": "fetch.com",
+        "endpoint": "Fetch Index Page",
+        "status": "UP",
+        "latency": "52.16ms"
+    },
+    {
+        "timestamp": "2025-02-21 06:20:01",
+        "domain": "fetch.com",
+        "endpoint": "Fake Post Endpoint",
+        "status": "DOWN",
+        "latency": "51.86ms"
+    },
+    {
+        "timestamp": "2025-02-21 06:20:01",
+        "domain": "fetch.com",
+        "endpoint": "Fetch Careers Page",
+        "status": "UP",
+        "latency": "54.67ms"
+    },
+    {
+        "timestamp": "2025-02-21 06:20:01",
+        "domain": "fetch.com",
+        "endpoint": "Fetch Index Page",
+        "status": "UP",
+        "latency": "58.56ms"
+    },
+    {
+        "timestamp": "2025-02-21 06:25:19",
+        "domain": "fetch.com",
+        "endpoint": "Fake Post Endpoint",
+        "status": "DOWN",
+        "latency": "72.16ms"
+    },
+    {
+        "timestamp": "2025-02-21 06:25:19",
+        "domain": "fetch.com",
+        "endpoint": "Fetch Index Page",
+        "status": "UP",
+        "latency": "79.71ms"
+    },
+    {
+        "timestamp": "2025-02-21 06:25:19",
+        "domain": "fetch.com",
+        "endpoint": "Fetch Careers Page",
+        "status": "UP",
+        "latency": "79.72ms"
+    },
+    {
+        "timestamp": "2025-02-21 06:25:19",
+        "domain": "fetch.com",
+        "endpoint": "Fake Post Endpoint",
+        "status": "DOWN",
+        "latency": "72.16ms"
+    },
+    {
+        "timestamp": "2025-02-21 06:25:19",
+        "domain": "fetch.com",
+        "endpoint": "Fetch Index Page",
+        "status": "UP",
+        "latency": "79.71ms"
+    },
+    {
+        "timestamp": "2025-02-21 06:25:19",
+        "domain": "fetch.com",
+        "endpoint": "Fetch Careers Page",
+        "status": "UP",
+        "latency": "79.72ms"
+    },
+    {
+        "timestamp": "2025-02-21 06:25:49",
+        "domain": "fetch.com",
+        "endpoint": "Fetch Index Page",
+        "status": "UP",
+        "latency": "56.35ms"
+    },
+    {
+        "timestamp": "2025-02-21 06:25:49",
+        "domain": "fetch.com",
+        "endpoint": "Fetch Careers Page",
+        "status": "UP",
+        "latency": "59.23ms"
+    },
+    {
+        "timestamp": "2025-02-21 06:25:49",
+        "domain": "fetch.com",
+        "endpoint": "Fake Post Endpoint",
+        "status": "DOWN",
+        "latency": "61.21ms"
+    }
+]
