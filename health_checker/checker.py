@@ -1,4 +1,5 @@
 import asyncio
+import os
 import aiohttp
 import yaml
 import argparse
@@ -6,9 +7,27 @@ import logging
 import time
 from collections import defaultdict
 from typing import Dict, List
+from rich.console import Console
+from rich.logging import RichHandler
 
-# Configure logging
-logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
+# Ensure logs directory exists
+LOG_DIR = "logs"
+os.makedirs(LOG_DIR, exist_ok=True)
+
+# Define log file path
+LOG_FILE = os.path.join(LOG_DIR, "health_checker.log")
+
+# Configure logging to both console and log file
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s - %(levelname)s - %(message)s",
+    handlers=[
+        RichHandler(markup=True),  # Colorized console output
+        logging.FileHandler(LOG_FILE)  # Save logs to logs/health_checker.log
+    ],
+)
+
+console = Console()
 
 class HealthChecker:
     def __init__(self, config_path: str, interval: int = 15):
@@ -42,7 +61,7 @@ class HealthChecker:
                     status = "UP"
 
         except Exception as e:
-            logging.warning(f"{name} ({url}) failed with error: {e}")
+            logging.warning(f"[bold yellow]{name} ({url}) failed with error:[/bold yellow] {e}")
 
         # Track stats
         self.domain_stats[domain]['total'] += 1
@@ -50,7 +69,8 @@ class HealthChecker:
             self.domain_stats[domain]['up'] += 1
 
         latency_display = f"{latency:.2f}ms" if latency is not None else "N/A"
-        logging.info(f"{name} ({url}) - Status: {status} - Latency: {latency_display}")
+        log_color = "[green]" if status == "UP" else "[red]"
+        logging.info(f"{log_color}{name} ({url}) - Status: {status} - Latency: {latency_display}[/]")
 
     async def run_health_checks(self):
         """Continuously check endpoints every interval."""
@@ -62,7 +82,7 @@ class HealthChecker:
                 # Log availability stats
                 for domain, stats in self.domain_stats.items():
                     availability = (stats['up'] / stats['total']) * 100
-                    logging.info(f"{domain} has {availability:.0f}% availability")
+                    logging.info(f"[cyan]{domain} has {availability:.0f}% availability[/cyan]")
                 
                 await asyncio.sleep(self.interval)
 
@@ -76,4 +96,4 @@ if __name__ == "__main__":
     try:
         asyncio.run(checker.run_health_checks())
     except KeyboardInterrupt:
-        logging.info("Health checker stopped.")
+        logging.info("[bold yellow]Health checker stopped.[/bold yellow]")
