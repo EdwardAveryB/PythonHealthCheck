@@ -46,22 +46,33 @@ class HealthChecker:
 
 
     def save_reports(self):
-        """Save collected health check results to CSV & JSON."""
+        """Append collected health check results to CSV & JSON for long-term tracking."""
         os.makedirs("logs", exist_ok=True)  # Ensure logs directory exists
 
-        # Save as CSV
+        # Append to CSV file
         csv_file = "logs/availability_report.csv"
-        with open(csv_file, mode="w", newline="") as file:
+        file_exists = os.path.isfile(csv_file)
+        
+        with open(csv_file, mode="a", newline="") as file:
             writer = csv.DictWriter(file, fieldnames=["timestamp", "domain", "endpoint", "status", "latency"])
-            writer.writeheader()
+            if not file_exists:
+                writer.writeheader()  # Write headers only if the file is new
             writer.writerows(self.results)
 
-        # Save as JSON
+        # Append to JSON file
         json_file = "logs/availability_report.json"
-        with open(json_file, mode="w") as file:
-            json.dump(self.results, file, indent=4)
+        if os.path.isfile(json_file):
+            with open(json_file, "r") as file:
+                existing_data = json.load(file)
+        else:
+            existing_data = []
 
-        logging.info("[cyan]Saved reports to logs/availability_report.csv and logs/availability_report.json[/cyan]")
+        existing_data.extend(self.results)
+
+        with open(json_file, "w") as file:
+            json.dump(existing_data, file, indent=4)
+
+        logging.info("[cyan]Updated reports in logs/availability_report.csv and logs/availability_report.json[/cyan]")
 
     async def check_endpoint(self, session: aiohttp.ClientSession, endpoint: Dict):
         """Perform a health check on a single endpoint and store results."""
@@ -103,8 +114,25 @@ class HealthChecker:
         log_color = "[green]" if status == "UP" else "[red]"
         logging.info(f"{log_color}{name} ({url}) - Status: {status} - Latency: {latency_display}[/]")
 
+    def update_availability_trends(self):
+        """Track and log long-term availability trends across multiple runs."""
+        trends_file = "logs/availability_trends.csv"
+        file_exists = os.path.isfile(trends_file)
+
+        with open(trends_file, mode="a", newline="") as file:
+            writer = csv.DictWriter(file, fieldnames=["timestamp", "domain", "availability"])
+            if not file_exists:
+                writer.writeheader()
+
+            for domain, stats in self.domain_stats.items():
+                availability = (stats["up"] / stats["total"]) * 100
+                writer.writerow({"timestamp": time.strftime("%Y-%m-%d %H:%M:%S"), "domain": domain, "availability": f"{availability:.2f}"})
+
+        logging.info("[magenta]Updated long-term availability trends in logs/availability_trends.csv[/magenta]")
+
+
     async def run_health_checks(self):
-        """Continuously check endpoints, log availability, and save reports."""
+        """Continuously check endpoints, log availability, save reports, and track trends."""
         async with aiohttp.ClientSession() as session:
             while True:
                 tasks = [self.check_endpoint(session, ep) for ep in self.endpoints]
@@ -112,11 +140,12 @@ class HealthChecker:
 
                 # Log availability stats
                 for domain, stats in self.domain_stats.items():
-                    availability = (stats['up'] / stats['total']) * 100
+                    availability = (stats["up"] / stats["total"]) * 100
                     logging.info(f"[cyan]{domain} has {availability:.0f}% availability[/cyan]")
 
-                # Save reports after each cycle
+                # Save reports and update trends
                 self.save_reports()
+                self.update_availability_trends()
 
                 await asyncio.sleep(self.interval)
 
